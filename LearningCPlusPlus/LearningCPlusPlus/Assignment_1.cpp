@@ -1,6 +1,9 @@
 #include <iostream>
-#include <windows.h>
+#include <windows.h> // used for Sleep()
 using namespace std;
+
+// Compound Interest Calculator
+// by Garen Yöndem
 
 double calcCompoundInterest(double *principal, double *interestRate, int *timesPerYear, double *years) {
 	//formula S=P(1 + r/n)^nt
@@ -31,5 +34,5 @@ void main() {
 	cout << "You final payment will be: " << amount << endl;
 	cout << "You will earn: " << amount - principal;
 
-	Sleep(1000000);
+	Sleep(1000000); // added for being able to see results, otherwise console closes once the execution is complete.
 }

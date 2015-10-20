@@ -24,5 +24,8 @@
     <ClCompile Include="Assignment_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="19OctoberExamples.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
