@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InClassExamples.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="19OctoberExamples.cpp">
+    <ClCompile Include="..\LearningCPlusPlus\Assignment_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

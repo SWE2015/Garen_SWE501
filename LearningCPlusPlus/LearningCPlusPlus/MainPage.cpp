@@ -2,8 +2,8 @@
 #include <windows.h>
 using namespace std;
 
-//void main()
-//{
+void main()
+{
 	//cout << "Hello World";
 
 	/*int x = 1;
@@ -45,4 +45,4 @@ using namespace std;
 	}
 	cout << sum;*/
 
-//}
+}
