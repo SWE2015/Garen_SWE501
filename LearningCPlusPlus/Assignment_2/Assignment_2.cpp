@@ -1,6 +1,6 @@
 #include<iostream>
 #include<Windows.h> // used for Sleep()
-#include<string>
+#include<string> // used for string type and getline() method
 #include<vector> // used for being able to return array of objects
 #include<cstdlib> // used for exit()
 using namespace std;
@@ -14,6 +14,7 @@ public:
 	string name;
 	string writer;
 	int pages;
+
 };
 
 int index;
@@ -60,7 +61,7 @@ public:
 			cout << "Writer: " << i.writer << endl;
 			cout << "Pages: " << i.pages << endl << endl;
 		}
-		cout << "Number of total books: " << countAllBooks();
+		cout << "Number of total books: " << countAllBooks() << endl;
 	}
 
 	static vector<Book> getAllBooks()
@@ -121,6 +122,30 @@ public:
 			removeBook();
 		}
 	}
+
+	static void addNewBook() {
+		Book newBook;
+		cout << "What is the name of the Book?" << endl;
+		cin.ignore(); // used for ignoring the whitespace and waiting for input while using getline()
+		getline(cin, newBook.name); // used for getting more then one word
+		cout << "Who is the writer of " << newBook.name << " ?" << endl;
+		cin.ignore();
+		getline(cin, newBook.writer);
+	reEnterPages:
+		cout << "How many pages are in the book " << newBook.name << " ?" << endl;
+		cin.ignore();
+		cin >> newBook.pages;
+		if (!cin.fail()) {
+			allBooks.push_back(newBook);
+			cout << "Book successfully added to library database" << endl;
+		}
+		else {
+			cout << "Please type a integer value for pages" << endl;
+			cin.clear();
+			cin.ignore();
+			goto reEnterPages;
+		}
+	}
 };
 
 void helpDoc() {
@@ -130,10 +155,11 @@ void helpDoc() {
 	cout << "Type \"3\" to add new book" << endl;
 	cout << "Type \"4\" to list all books" << endl;
 	cout << "Type \"5\" to get help whenever you need" << endl;
+	cout << "Type \"6\" to exit console" << endl;
 }
 
 void exitApp() {
-	exit;
+	exit(0);
 }
 
 enum Commands { GET = 0, REMOVE = 1, UPDATE = 2, ADDNEWBOOK = 3, SHOWALL = 4, HELP = 5, EXIT = 6 };
@@ -153,7 +179,7 @@ void WaitForInput() {
 		cout << "UPDATE hit" << endl;
 		break;
 	case ADDNEWBOOK:
-		cout << "ADDNEWBOOK hit" << endl;
+		myMethods::addNewBook();
 		break;
 	case SHOWALL:
 		myMethods::getAllBooksToDisplay();
