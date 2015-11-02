@@ -1,5 +1,4 @@
 #include<iostream>
-#include<Windows.h> // used for Sleep()
 #include<string> // used for string type and getline() method
 #include<vector> // used for being able to return array of objects
 #include<cstdlib> // used for exit()
@@ -77,6 +76,10 @@ public:
 		return  allBooks.size();
 	}
 
+	static Book getBookByIndex(int index) {
+		return allBooks.at(index - 1);
+	}
+
 	static void getBook() {
 		cin.clear();
 		cin.ignore();
@@ -85,7 +88,8 @@ public:
 		if (!cin.fail()) {
 			try
 			{
-				cout << "Name: " << allBooks.at(index - 1).name << endl << "Pages: " << allBooks.at(index - 1).pages << endl << "Writer: " << allBooks.at(index - 1).writer << endl;
+				auto book = getBookByIndex(index);
+				cout << "Name: " << book.name << endl << "Pages: " << book.pages << endl << "Writer: " << book.writer << endl;
 			}
 			catch (const std::exception&)
 			{
@@ -107,7 +111,7 @@ public:
 		if (!cin.fail()) {
 			try
 			{
-				auto bookToRemove = allBooks.at(index - 1);
+				auto bookToRemove = getBookByIndex(index);
 				allBooks.erase(allBooks.begin() + (index - 1));
 				cout << "Successfully removed " << bookToRemove.name << endl;
 			}
@@ -151,18 +155,17 @@ public:
 void helpDoc() {
 	cout << "Type \"0\" to get a book at specific index" << endl;
 	cout << "Type \"1\" to remove a book at specific index" << endl;
-	cout << "Type \"2\" to update a book at specific index" << endl;
-	cout << "Type \"3\" to add new book" << endl;
-	cout << "Type \"4\" to list all books" << endl;
-	cout << "Type \"5\" to get help whenever you need" << endl;
-	cout << "Type \"6\" to exit console" << endl;
+	cout << "Type \"2\" to add new book" << endl;
+	cout << "Type \"3\" to list all books" << endl;
+	cout << "Type \"4\" to get help whenever you need" << endl;
+	cout << "Type \"5\" to exit console" << endl;
 }
 
 void exitApp() {
 	exit(0);
 }
 
-enum Commands { GET = 0, REMOVE = 1, UPDATE = 2, ADDNEWBOOK = 3, SHOWALL = 4, HELP = 5, EXIT = 6 };
+enum Commands { GET = 0, REMOVE = 1, ADDNEWBOOK = 2, SHOWALL = 3, HELP = 4, EXIT = 5 };
 
 void WaitForInput() {
 	//waiting to processing input
@@ -174,9 +177,6 @@ void WaitForInput() {
 		break;
 	case REMOVE:
 		myMethods::removeBook();
-		break;
-	case UPDATE:
-		cout << "UPDATE hit" << endl;
 		break;
 	case ADDNEWBOOK:
 		myMethods::addNewBook();
@@ -194,16 +194,12 @@ void WaitForInput() {
 	WaitForInput();
 }
 
-
-
 int main() {
 	myMethods::generateDemoData();
 
 	cout << "Welcome to Mini Library Management System" << endl;
 	cout << "Please answer the questions below and then press \"enter\" to proceed to next step" << endl << endl;
 
-	cout << "Waiting for a command, type 5 to get started" << endl << endl;
+	cout << "Waiting for a command, type 4 to get help/started" << endl << endl;
 	WaitForInput();
-
-	//Sleep(100000); // added for being able to see results, otherwise console closes once the execution is complete.
 };
