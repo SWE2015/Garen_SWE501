@@ -45,4 +45,38 @@ void main()
 	}
 	cout << sum;*/
 
+/*#include "ItemType.h"
+	class UnsotredType {
+	public:
+		void MakeEmpty();
+		bool isFull();
+		int Lenghs();
+		void RetrievetItem(ItemType &item, bool &found);
+		void InsertItem(ItemType item);
+		void DeleteItem(ItemType item);
+		void ResetList();
+		void GetNextItem(ItemType &item);
+	private:
+		int lenght;
+		ItemType info["MAX-ITEMS"];
+		int currentPos;
+	};*/
+
+	/*
+	//Default constructor
+	SortedType::SortedType() {
+		lenght = 0;
+	}
+	//Primitive type constructor
+	SortedType::SortedType(ItemTyp initialValue) {
+		lenght = 0;
+		for (size_t i = 0; i < MAX_ITEMS; i++)
+		{
+			info[i] = initialValue;
+		}
+	}
+	*/
+
+
+
 }
