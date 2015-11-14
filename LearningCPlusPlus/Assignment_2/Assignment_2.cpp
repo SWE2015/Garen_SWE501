@@ -13,7 +13,6 @@ public:
 	string name;
 	string writer;
 	int pages;
-
 };
 
 int index;
