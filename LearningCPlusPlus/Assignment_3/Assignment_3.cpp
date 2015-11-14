@@ -10,13 +10,31 @@ using namespace std;
 enum Commands { GET = 0, REMOVE = 1, ADDNEWBOOK = 2, SHOWALL = 3, HELP = 4, EXIT = 5 };
 enum Sections { SciFi = 0, Adventure = 1, Comedy = 2, Horror = 3, Fantasy = 4, Novel = 5, Religious = 6 };
 
-int index;
-static vector<Book> allBooks;
+inline const char* ToString(Sections sec)
+{
+	switch (sec)
+	{
+	case SciFi:
+		return "Sci-Fi";
+	case Adventure:
+		return "Adventure";
+	case Comedy:
+		return "Comedy";
+	case Horror:
+		return "Horror";
+	case Fantasy:
+		return "Fantasy";
+	case Novel:
+		return "Novel";
+	case Religious:
+		return "Religious";
+	}
+}
 
 class Book
 {
 private:
-	static const int _section = 7; // Sci-Fi, Adventure, Comedy ...
+	static const Sections _section = SciFi; // Sci-Fi, Adventure, Comedy ...
 	static const int _shelfNumber = 12;
 	static const int _rowNumber = 100;
 
@@ -25,7 +43,11 @@ public:
 	string writer;
 	int pages;
 	long bookPosition[_section][_shelfNumber][_rowNumber];
+
 };
+
+int index;
+static vector<Book> allBooks;
 
 class myMethods {
 public:
@@ -72,7 +94,8 @@ public:
 		for each(Book i in getAllBooks()) {
 			cout << "Name: " << i.name << endl;
 			cout << "Writer: " << i.writer << endl;
-			cout << "Pages: " << i.pages << endl << endl;
+			cout << "Pages: " << i.pages << endl;
+			cout << "This book is at: " << i.bookPosition << endl << endl;
 		}
 		cout << "Number of total books: " << countAllBooks() << endl;
 	}
