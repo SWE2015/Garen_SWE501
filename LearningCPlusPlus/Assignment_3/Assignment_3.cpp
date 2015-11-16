@@ -4,198 +4,174 @@
 #include<cstdlib> // used for exit()
 using namespace std;
 
-// Mini Library Management System v2
+// Mini Class Management System
 // by Garen Yöndem
 
-enum Commands { GET = 0, REMOVE = 1, ADDNEWBOOK = 2, SHOWALL = 3, HELP = 4, EXIT = 5 };
-enum Sections { SciFi = 0, Adventure = 1, Comedy = 2, Horror = 3, Fantasy = 4, Novel = 5, Religious = 6 };
+enum Commands { GET = 0, REMOVE = 1, SHOWALL = 2, HELP = 3, EXIT = 4 };
 
-inline const char* ToString(Sections sec)
+class Student
 {
-	switch (sec)
-	{
-	case SciFi:
-		return "Sci-Fi";
-	case Adventure:
-		return "Adventure";
-	case Comedy:
-		return "Comedy";
-	case Horror:
-		return "Horror";
-	case Fantasy:
-		return "Fantasy";
-	case Novel:
-		return "Novel";
-	case Religious:
-		return "Religious";
-	}
-}
-
-class Book
-{
-private:
-	static const Sections _section = SciFi; // Sci-Fi, Adventure, Comedy ...
-	static const int _shelfNumber = 12;
-	static const int _rowNumber = 100;
-
 public:
 	string name;
-	string writer;
-	int pages;
-	long bookPosition[_section][_shelfNumber][_rowNumber];
+	int age;
+	int quizResult;
+};
 
+class Class
+{
+public:
+	string name;
+	string teacherName;
+	vector<Student> students;
 };
 
 int index;
-static vector<Book> allBooks;
+static vector<Class> school;
 
 class myMethods {
 public:
 	static void generateDemoData() {
-		Book demoBook;
-		demoBook.name = "Don Quixote";
-		demoBook.pages = 490;
-		demoBook.writer = "Miguel De Cervantes";
-		demoBook.bookPosition[Novel][12][4];
-		allBooks.push_back(demoBook);
+		// class 1
+		Class _class;
+		_class.name = "10A";
+		_class.teacherName = "Angela";
+		// student 1
+		Student _student;
+		_student.name = "Jack";
+		_student.age = 10;
+		_student.quizResult = 80;
+		_class.students.push_back(_student);
+		// student 2
+		_student.name = "Rose";
+		_student.age = 11;
+		_student.quizResult = 47;
+		_class.students.push_back(_student);
+		// student 3
+		_student.name = "Lena";
+		_student.age = 13;
+		_student.quizResult = 63;
+		_class.students.push_back(_student);
+		school.push_back(_class);
 
-		demoBook.name = "Pilgrim's Progress";
-		demoBook.pages = 230;
-		demoBook.writer = "John Bunyan";
-		demoBook.bookPosition[Religious][2][54];
-		allBooks.push_back(demoBook);
-
-		demoBook.name = "Robinson Crusoe";
-		demoBook.pages = 140;
-		demoBook.writer = "Daniel Defoe";
-		demoBook.bookPosition[Adventure][5][78];
-		allBooks.push_back(demoBook);
-
-		demoBook.name = "Gulliver's Travels";
-		demoBook.pages = 250;
-		demoBook.writer = "Jonathan Swift";
-		demoBook.bookPosition[Fantasy][7][61];
-		allBooks.push_back(demoBook);
-
-		demoBook.name = "Clarissa";
-		demoBook.pages = 290;
-		demoBook.writer = "Samuel Richardson";
-		demoBook.bookPosition[Novel][1][1];
-		allBooks.push_back(demoBook);
-
-		demoBook.name = "Frankenstein";
-		demoBook.pages = 350;
-		demoBook.writer = "Mary Shelley";
-		demoBook.bookPosition[Horror][8][32];
-		allBooks.push_back(demoBook);
+		// class 2
+		_class.name = "11C";
+		_class.teacherName = "Ben";
+		// class 2 student 1
+		_student.name = "Marty";
+		_student.age = 15;
+		_student.quizResult = 66;
+		_class.students.push_back(_student);
+		// class 2 student 2
+		_student.name = "Yolo";
+		_student.age = 14;
+		_student.quizResult = 82;
+		_class.students.push_back(_student);
+		// class 2 student 3
+		_student.name = "Jaina";
+		_student.age = 18;
+		_student.quizResult = 61;
+		_class.students.push_back(_student);
+		school.push_back(_class);
 	}
 
-	static void getAllBooksToDisplay() {
-		for each(Book i in getAllBooks()) {
-			cout << "Name: " << i.name << endl;
-			cout << "Writer: " << i.writer << endl;
-			cout << "Pages: " << i.pages << endl;
-			cout << "This book is at: " << i.bookPosition << endl << endl;
+	static void showAll() {
+		for each(Class _class in getAllClasses()) {
+			cout << "Instructor name: " << _class.teacherName << endl;
+			cout << "Student count in this class: " << _class.students.size() << endl << endl;
+			if (_class.students.size() > 0)
+			{
+				for each(Student _student in _class.students) {
+					cout << "Student name: " << _student.name << endl;
+					cout << "Student age: " << _student.age << endl;
+					cout << "Student quiz result: " << _student.quizResult << endl << endl;
+				}
+			}
 		}
-		cout << "Number of total books: " << countAllBooks() << endl;
+		cout << "Number of total classes in school is: " << countAllClasses() << endl;
 	}
 
-	static vector<Book> getAllBooks()
+	static vector<Class> getAllClasses()
 	{
-		vector<Book> books;
-		for each(auto i in allBooks) {
-			books.push_back(i);
+		vector<Class> tempSchool;
+		for each(auto _class in school) {
+			tempSchool.push_back(_class);
 		}
-		return books;
+		return tempSchool;
 	}
 
-	static int countAllBooks() {
-		return  allBooks.size();
+	static int countAllClasses() {
+		return school.size();
 	}
 
-	static Book getBookByIndex(int index) {
-		return allBooks.at(index - 1);
+	static Class getClassByIndex(int classIndex) {
+		return school.at(classIndex - 1);
 	}
 
-	static void getBook() {
+	static Student getStudentByIndex(Class _class, int stidentIndex) {
+		return _class.students.at(stidentIndex - 1);
+	}
+
+	static void retrieveStudent() {
 		cin.clear();
 		cin.ignore();
-		cout << "Type the row number of the book you want to find" << endl;
+		cout << "Type the number of class you want to find" << endl;
 		cin >> index;
 		if (!cin.fail()) {
 			try
 			{
-				auto book = getBookByIndex(index);
-				cout << "Name: " << book.name << endl << "Pages: " << book.pages << endl << "Writer: " << book.writer << endl;
+				auto _class = getClassByIndex(index);
+				cout << "Class gathered successfully. Type the number of student you want to find" << endl;
+				cin >> index;
+				auto _student = getStudentByIndex(_class, index);
+				cout << "Student gathered successfully." << endl << "Name: " << _student.name << endl << "Age: " << _student.age << endl << "Quiz Result: " << _student.quizResult << endl;
 			}
 			catch (const std::exception&)
 			{
-				cout << "Unable to find a book at that row" << endl;
-				getBook();
+				cout << "Unable to find the class or student you typed" << endl;
+				retrieveStudent();
 			}
 		}
 		else {
 			cout << "Please type a integer value" << endl;
-			getBook();
+			retrieveStudent();
 		}
 	}
 
-	static void removeBook() {
+	static void deleteStudent() {
 		cin.clear();
 		cin.ignore();
-		cout << "Type the row number of the book you want to remove" << endl;
+		cout << "Type the number of class you want to find" << endl;
 		cin >> index;
 		if (!cin.fail()) {
 			try
 			{
-				auto bookToRemove = getBookByIndex(index);
-				allBooks.erase(allBooks.begin() + (index - 1));
-				cout << "Successfully removed " << bookToRemove.name << endl;
+				auto _class = getClassByIndex(index);
+				cout << "Class gathered successfully. Type the number of student you want to find" << endl;
+				cin >> index;
+				auto _studentToRemove = getStudentByIndex(_class, index);
+				cout << "Student gathered successfully." << endl;
+				_class.students.erase(_class.students.begin() + (index - 1));
+				cout << "Successfully removed " << _studentToRemove.name << " from class and school" << endl;
 			}
 			catch (const std::exception&)
 			{
-				cout << "Unable to find a book at that row" << endl;
-				removeBook();
+				cout << "Unable to find the class or student you typed" << endl;
+				deleteStudent();
 			}
 		}
 		else {
 			cout << "Please type a integer value" << endl;
-			removeBook();
-		}
-	}
-
-	static void addNewBook() {
-		Book newBook;
-		cout << "What is the name of the Book?" << endl;
-		cin.ignore(); // used for ignoring the whitespace and waiting for input while using getline()
-		getline(cin, newBook.name); // used for getting more then one word
-		cout << "Who is the writer of " << newBook.name << " ?" << endl;
-		cin.ignore();
-		getline(cin, newBook.writer);
-	reEnterPages:
-		cout << "How many pages are in the book " << newBook.name << " ?" << endl;
-		cin.ignore();
-		cin >> newBook.pages;
-		if (!cin.fail()) {
-			allBooks.push_back(newBook);
-			cout << "Book successfully added to library database" << endl;
-		}
-		else {
-			cout << "Please type a integer value for pages" << endl;
-			cin.clear();
-			cin.ignore();
-			goto reEnterPages;
+			deleteStudent();
 		}
 	}
 };
 
 void helpDoc() {
-	cout << "Type \"0\" to get a book at specific index" << endl;
-	cout << "Type \"1\" to remove a book at specific index" << endl;
-	cout << "Type \"2\" to add new book" << endl;
-	cout << "Type \"3\" to list all books" << endl;
-	cout << "Type \"4\" to get help whenever you need" << endl;
-	cout << "Type \"5\" to exit console" << endl;
+	cout << "Type \"0\" to retrieve a student" << endl;
+	cout << "Type \"1\" to remove a student" << endl;
+	cout << "Type \"2\" to list all students" << endl;
+	cout << "Type \"3\" to get help whenever you need" << endl;
+	cout << "Type \"4\" to exit console" << endl;
 }
 
 void exitApp() {
@@ -205,19 +181,15 @@ void exitApp() {
 void WaitForInput() {
 	//waiting to processing input
 	cin >> index;
-
 	switch (index) {
 	case GET:
-		myMethods::getBook();
+		myMethods::retrieveStudent();
 		break;
 	case REMOVE:
-		myMethods::removeBook();
-		break;
-	case ADDNEWBOOK:
-		myMethods::addNewBook();
+		myMethods::deleteStudent();
 		break;
 	case SHOWALL:
-		myMethods::getAllBooksToDisplay();
+		myMethods::showAll();
 		break;
 	case HELP:
 		helpDoc();
@@ -231,10 +203,8 @@ void WaitForInput() {
 
 int main() {
 	myMethods::generateDemoData();
-
-	cout << "Welcome to Mini Library Management System" << endl;
+	cout << "Welcome to Mini School Management System" << endl;
 	cout << "Please answer the questions below and then press \"enter\" to proceed to next step" << endl << endl;
-
-	cout << "Waiting for a command, type 4 to get help/started" << endl << endl;
+	cout << "Waiting for a command, type 3 to get help/started" << endl << endl;
 	WaitForInput();
 };
