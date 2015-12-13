@@ -79,8 +79,6 @@ void showList(node *current) {
 	}
 }
 
-
-
 int main() {
 	node *head = NULL;
 	node *last = NULL;
