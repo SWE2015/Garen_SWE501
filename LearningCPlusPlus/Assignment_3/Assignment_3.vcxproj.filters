@@ -19,9 +19,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\..\Desktop\Assignment 3.docx">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>
