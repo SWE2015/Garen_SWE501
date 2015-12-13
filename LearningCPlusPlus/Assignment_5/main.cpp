@@ -79,9 +79,19 @@ void showList(node *current) {
 	}
 }
 
+
+
 int main() {
 	node *head = NULL;
 	node *last = NULL;
+
+	// populating LinkedList
+	for (size_t i = 0; i < 18; i++)
+	{
+		int tempNum = rand() % 100;
+		insert(head, last, tempNum);
+	}
+
 	char choice;
 	int number;
 	do {
