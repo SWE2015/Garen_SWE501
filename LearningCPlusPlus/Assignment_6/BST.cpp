@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include "BST.h"
 using namespace std;
-
+//BST.cpp
 BST::BST() {
 	root = NULL;
 };

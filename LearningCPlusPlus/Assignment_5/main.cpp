@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+// C++ LinkedList implementation
+// by Garen Yöndem
+
 struct node {
 	int number;
 	node *next;
